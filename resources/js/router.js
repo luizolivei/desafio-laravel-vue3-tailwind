@@ -1,14 +1,18 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
+    //Erro page when the url not mathing with anything here
+    { path: '/:pathMatch(.*)*',
+        component: () => import("./pages/NotFound.vue")
+    },
     {
         path: "/",
-        component: () => import("./Pages/HomeRoute.vue"),
+        component: () => import("./pages/HomeRoute.vue"),
     },
     {
         path: "/test",
-        component: () => import("./Pages/TestRoute.vue"),
-    },
+        component: () => import("./pages/TestRoute.vue"),
+    }
 ];
 
 export default createRouter({
