@@ -1,15 +1,7 @@
-<script setup>
-
-</script>
-
 <template>
-    <div>
-        <h1>404 - Page Not Found</h1>
-        <p class="text-4xl text-amber-700">Sorry, the page you are looking for does not exist.</p>
-        <img style="width: 200px" src="../../images/404.jpg">
+    <div class="min-h-screen flex flex-col items-center justify-center p-4">
+        <img class="w-64 mb-8" src="../../images/404.jpg" alt="404 Image">
+        <h1 class="text-center text-xl md:text-4xl font-bold text-gray-800 mb-4">404 - Página não encontrada</h1>
+        <p class="text-center text-md md:text-lg text-gray-600">Desculpe, essa página não foi encontrada. Tente novamente mais tarde.</p>
     </div>
 </template>
-
-<style scoped>
-
-</style>
