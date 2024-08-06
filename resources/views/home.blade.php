@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vagas de emprego</title>
-    @vite(['resources/js/app.js'])
+    <title>Home Page</title>
 </head>
 <body>
-<div id="app"></div>
+<h1>Bem-vindo à Home Page!</h1>
+<p>Esta é a nova página inicial.</p>
 </body>
 </html>
