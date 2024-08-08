@@ -17,7 +17,7 @@
 
 <script>
 import axios from 'axios';
-import { mapActions } from 'vuex';
+import store from '../store';
 
 export default {
     data() {
@@ -27,27 +27,18 @@ export default {
         };
     },
     methods: {
-        ...mapActions(['login']),
         async userLogin() {
             try {
-                axios.post('/api/login', {
+                const response = await axios.post('/api/login', {
                     email: this.email,
                     password: this.password
-                })
-                    .then(async response => {
-                        const user = response.data.user;
-                        const token = response.data.token;
-                        console.log("token ", token)
-                        console.log("user ", user)
-                        await this.login({user: user, token: token});
-                        alert('Login bem-sucedido!');
-                        this.$router.push({name: 'Home'});
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-
-
+                });
+                const user = response.data.user;
+                const token = response.data.token;
+                await store.dispatch('login', {user, token});
+                alert('Login bem-sucedido!');
+                console.log("isLogged ", store.getters.isAuthenticated)
+                // this.$router.push({name: 'Home'});
             } catch (error) {
                 console.error(error);
             }

@@ -1,5 +1,4 @@
 import { createStore } from 'vuex';
-import axios from 'axios';
 
 export default createStore({
     state: {
@@ -19,15 +18,9 @@ export default createStore({
         }
     },
     actions: {
-        async register({ commit }, userData) {
-            const response = await axios.post('/register', userData);
-            commit('setUser', response.data.user);
-            commit('setToken', response.data.token);
-        },
-        async login({ commit }, credentials) {
-            const response = await axios.post('/login', credentials);
-            commit('setUser', response.data.user);
-            commit('setToken', response.data.token);
+        async login({ commit }, data) {
+            commit('setUser', data.user);
+            commit('setToken', data.token);
         },
         logout({ commit }) {
             commit('logout');
@@ -39,6 +32,9 @@ export default createStore({
         },
         userRole(state) {
             return state.user ? state.user.role : null;
-        }
+        },
+        getToken(state) {
+            return state.token;
+        },
     }
 });

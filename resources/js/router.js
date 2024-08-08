@@ -8,15 +8,18 @@ const routes = [
     },
     {
         path: "/",
+        name: "Home",
         component: () => import("./pages/HomeRoute.vue"),
     },
     {
         path: "/normal",
+        name: "Normal",
         component: () => import("./pages/TestRoute.vue"),
         meta: { requiresAuth: true, requiresUser: true },
     },
     {
         path: "/admin",
+        name: "Admin",
         component: () => import("./pages/TestRoute.vue"),
         meta: { requiresAuth: true, requiresAdmin: true }
     },
@@ -38,13 +41,16 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
+    console.log("aq caiu")
     if (to.matched.some(record => record.meta.requiresAuth)) {
+        console.log("aq caiu2")
         if (!store.getters.isAuthenticated) {
-            next({ name: 'Login' });
+            console.log("aq caiu3", store.getters.getToken)
+            // next({ name: 'Login' });
         } else {
-            if (to.matched.some(record => record.meta.requiresAdmin) && store.getters.userRole !== 'admin') {
+            if (to.matched.some(record => record.meta.requiresAdmin) && store.getters.userRole !== '2') {
                 next({ name: 'Home' });
-            } else if (to.matched.some(record => record.meta.requiresUser) && store.getters.userRole === 'admin') {
+            } else if (to.matched.some(record => record.meta.requiresUser) && store.getters.userRole === '1') {
                 next({ name: 'Home' });
             } else {
                 next();
