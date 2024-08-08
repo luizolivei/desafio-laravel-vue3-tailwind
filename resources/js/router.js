@@ -1,38 +1,39 @@
-import { createRouter, createWebHistory } from "vue-router";
+import {createRouter, createWebHistory} from "vue-router";
 import store from './store';
 
 const routes = [
     //Erro page when the url not mathing with anything here
-    { path: '/:pathMatch(.*)*',
+    {
+        path: '/:pathMatch(.*)*',
         component: () => import("./pages/NotFound.vue")
     },
     {
         path: "/",
         name: "Home",
-        component: () => import("./pages/HomeRoute.vue"),
-    },
-    {
-        path: "/normal",
-        name: "Normal",
-        component: () => import("./pages/TestRoute.vue"),
-        meta: { requiresAuth: true, requiresUser: true },
+        component: () => import("./pages/home/index.vue"),
     },
     {
         path: "/admin",
         name: "Admin",
         component: () => import("./pages/TestRoute.vue"),
-        meta: { requiresAuth: true, requiresAdmin: true }
+        meta: {requiresAuth: true, requiresAdmin: true}
     },
     {
         path: "/login",
         name: "Login",
-        component: () => import("./pages/Login.vue"),
+        component: () => import("./pages/login/index.vue"),
     },
     {
         path: "/register",
         name: "Register",
-        component: () => import("./pages/Register.vue"),
-    }
+        component: () => import("./pages/register/index.vue"),
+    },
+    {
+        path: "/curriculo",
+        name: "Curriculo",
+        component: () => import("./pages/curriculo/index.vue"),
+        meta: {requiresAuth: true, requiresUser: true},
+    },
 ];
 
 const router = createRouter({
@@ -41,24 +42,24 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    console.log("aq caiu")
     if (to.matched.some(record => record.meta.requiresAuth)) {
-        console.log("aq caiu2")
+        console.log("caiu aq", store.getters.userRole)
         if (!store.getters.isAuthenticated) {
-            console.log("aq caiu3", store.getters.getToken)
-            // next({ name: 'Login' });
-        } else {
-            if (to.matched.some(record => record.meta.requiresAdmin) && store.getters.userRole !== '2') {
-                next({ name: 'Home' });
-            } else if (to.matched.some(record => record.meta.requiresUser) && store.getters.userRole === '1') {
-                next({ name: 'Home' });
-            } else {
-                next();
-            }
+            console.log("caiu aq1")
+            // next({name: 'Login'});
         }
-    } else {
+        if (to.matched.some(record => record.meta.requiresAdmin) && store.getters.userRole !== 2) {
+            console.log("caiu aq2")
+            // next({name: 'Home'});
+        }
+        if (to.matched.some(record => record.meta.requiresUser) && store.getters.userRole === 1) {
+            console.log("caiu aq3")
+            // next({name: 'Home'});
+        }
+        console.log("caiu aq4")
         next();
     }
+    next();
 });
 
 export default router;

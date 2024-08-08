@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CurriculoController;
+use App\Http\Controllers\VagaController;
 
 Route::post("/backend-response", function () {
     return 'Every thing okay!';
@@ -22,17 +23,18 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::middleware('auth:sanctum')->group(function () {
+    //Admin role group here
     Route::middleware('role:2')->group(function () {
         Route::get("/is-adm", function () {
-            error_log("É um adm.");
             return 'Yes is adm!';
         });
+        Route::get('/all-curriculos', [CurriculoController::class, 'allCurriculos']);
     });
     Route::get("/is-auth", function () {
-        error_log("Esta autenticado.");
         return 'Yes!';
     });
     Route::get('/curriculos', [CurriculoController::class, 'index']);
     Route::post('/curriculos', [CurriculoController::class, 'store']);
-    Route::delete('/curriculos/{id}', [CurriculoController::class, 'destroy']);
+    Route::put('/curriculos/{curriculo}', [CurriculoController::class, 'update']);
+    Route::delete('/curriculos/{curriculo}', [CurriculoController::class, 'destroy']);
 });

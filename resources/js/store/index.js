@@ -1,4 +1,5 @@
 import { createStore } from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 
 export default createStore({
     state: {
@@ -36,5 +37,6 @@ export default createStore({
         getToken(state) {
             return state.token;
         },
-    }
+    },
+    plugins: [createPersistedState()]
 });

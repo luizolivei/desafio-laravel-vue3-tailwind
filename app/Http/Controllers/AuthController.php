@@ -27,7 +27,7 @@ class AuthController extends Controller
             'role' => 1
         ]);
 
-        return response()->json(['message' => 'User registered successfully!'], 201);
+        return response()->json(['message' => 'Usuario registrado com sucesso!'], 201);
     }
 
     public function login(Request $request)
@@ -41,7 +41,7 @@ class AuthController extends Controller
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect.'],
+                'email' => ['As credenciais estão erradas.'],
             ]);
         }
 
@@ -53,6 +53,6 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
-        return response()->json(['message' => 'Logged out successfully!']);
+        return response()->json(['message' => 'Deslogado com sucesso!']);
     }
 }

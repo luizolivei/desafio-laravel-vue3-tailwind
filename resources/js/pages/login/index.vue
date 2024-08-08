@@ -17,7 +17,7 @@
 
 <script>
 import axios from 'axios';
-import store from '../store';
+import store from '../../store/index.js';
 
 export default {
     data() {
@@ -37,8 +37,9 @@ export default {
                 const token = response.data.token;
                 await store.dispatch('login', {user, token});
                 alert('Login bem-sucedido!');
-                console.log("isLogged ", store.getters.isAuthenticated)
-                // this.$router.push({name: 'Home'});
+                if (store.getters.userRole === 2)
+                    this.$router.push({name: 'Admin'});
+                this.$router.push({name: 'Home'});
             } catch (error) {
                 console.error(error);
             }
