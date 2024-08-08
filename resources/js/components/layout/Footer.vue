@@ -15,9 +15,6 @@
                             <a href="#" class="text-sm hover:underline">Home</a>
                         </li>
                         <li class="inline-block mx-2">
-                            <a href="/vagas" class="text-sm hover:underline">Vagas</a>
-                        </li>
-                        <li class="inline-block mx-2">
                             <a href="/login" class="text-sm hover:underline">Cadastre-se</a>
                         </li>
                     </ul>

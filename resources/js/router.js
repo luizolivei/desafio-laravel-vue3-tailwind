@@ -43,20 +43,15 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
-        console.log("caiu aq", store.getters.userRole)
         if (!store.getters.isAuthenticated) {
-            console.log("caiu aq1")
-            // next({name: 'Login'});
+            next({name: 'Login'});
         }
         if (to.matched.some(record => record.meta.requiresAdmin) && store.getters.userRole !== 2) {
-            console.log("caiu aq2")
-            // next({name: 'Home'});
+            next({name: 'Home'});
         }
         if (to.matched.some(record => record.meta.requiresUser) && store.getters.userRole === 1) {
-            console.log("caiu aq3")
-            // next({name: 'Home'});
+            next({name: 'Home'});
         }
-        console.log("caiu aq4")
         next();
     }
     next();

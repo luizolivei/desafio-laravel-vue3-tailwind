@@ -37,6 +37,9 @@ export default createStore({
         getToken(state) {
             return state.token;
         },
+        getUser(state) {
+            return state.user;
+        },
     },
     plugins: [createPersistedState()]
 });
