@@ -47,13 +47,13 @@
 <script>
 import axios from 'axios';
 import store from '../../store/index.js';
-
+import Swal from 'sweetalert2';
 export default {
     data() {
         return {
             email: '',
             password: '',
-            errors: {} // Armazenar os erros de validação
+            errors: {}
         };
     },
     methods: {
@@ -66,6 +66,10 @@ export default {
                 const user = response.data.user;
                 const token = response.data.token;
                 await store.dispatch('login', {user, token});
+                // await Swal.fire({
+                //     title: 'Login realizado com sucesso!',
+                //     confirmButtonText: 'OK'
+                // });
                 if (store.getters.userRole === 2)
                     return this.$router.push({name: 'Admin'});
                 this.$router.push({name: 'Curriculo'});
@@ -74,7 +78,11 @@ export default {
                     this.errors = error.response.data.errors;
                 } else {
                     console.log(error);
-                    alert(error.message);
+                    await Swal.fire({
+                        title: error.message,
+                        icon: 'warning',
+                        confirmButtonText: 'OK'
+                    });
                 }
             }
         },

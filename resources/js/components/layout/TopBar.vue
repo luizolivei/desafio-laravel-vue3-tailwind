@@ -1,7 +1,7 @@
 <script setup>
 import {computed, onBeforeUnmount, onMounted, ref} from 'vue';
 import store from '../../store/index.js';
-import Container from "@/components/layout/Container.vue";
+import Swal from "sweetalert2";
 
 const dropdownOpen = ref(false);
 const dropdownRef = ref(null);
@@ -28,9 +28,14 @@ onBeforeUnmount(() => {
     document.removeEventListener('click', handleClickOutside);
 });
 
-const logout = () => {
-    store.dispatch('logout');
-};
+async function logout() {
+    await store.dispatch('logout');
+    await Swal.fire({
+        title: 'Usuario desconectado.',
+        confirmButtonText: 'OK'
+    });
+    location.reload();
+}
 </script>
 
 

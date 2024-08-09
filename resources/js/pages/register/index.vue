@@ -66,6 +66,7 @@
 import { ref } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
+import Swal from "sweetalert2";
 
 export default {
     setup() {
@@ -78,13 +79,18 @@ export default {
 
         const register = async () => {
             try {
-                const response = await axios.post('/api/register', {
+                await axios.post('/api/register', {
                     name: name.value,
                     email: email.value,
                     password: password.value,
                     password_confirmation: password_confirmation.value
                 });
-                alert('Usuário registrado com sucesso!');
+                await Swal.fire({
+                    title: 'Usuário registrado com sucesso!',
+                    text: 'Agora você pode fazer login.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
                 router.push({ name: 'Login' });
             } catch (error) {
                 if (error.response && error.response.data.errors) {

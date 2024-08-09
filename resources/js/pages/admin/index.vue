@@ -5,6 +5,7 @@ import axios from "axios";
 import { useStore } from "vuex";
 import { dateFormat } from "@/mixins/dates";
 import {formatCPF} from "@/mixins/formatting.js";
+import Swal from "sweetalert2";
 
 const store = useStore();
 const curriculos = ref([]);
@@ -26,7 +27,11 @@ onMounted(async () => {
         }
     } catch (error) {
         console.error(error);
-        alert('Ocorreu um erro ao carregar os currículos.');
+        await Swal.fire({
+            title: 'Ocorreu um erro ao carregar os currículos.',
+            icon: 'error',
+            confirmButtonText: 'Try Again'
+        });
     }
 });
 

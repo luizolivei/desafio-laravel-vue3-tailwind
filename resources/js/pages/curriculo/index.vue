@@ -42,6 +42,7 @@ import ExperienceForm from "@/components/forms/ExperienceForm.vue";
 import EducationForm from "@/components/forms/EducationForm.vue";
 import CourseForm from "@/components/forms/CourseForm.vue";
 import Container from "@/components/layout/Container.vue";
+import Swal from "sweetalert2";
 const store = useStore();
 
 const form = ref({
@@ -70,21 +71,32 @@ const submitForm = async () => {
         form.value.cpf = form.value.cpf.replace(/\D/g, '');
         if (isEditMode.value) {
             await axios.put(`/api/curriculos/${form.value.id}`, form.value, config);
-            alert('Currículo atualizado com sucesso!');
+            await Swal.fire({
+                title: 'Currículo atualizado com sucesso!',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
         } else {
             const response = await axios.post('/api/curriculos', form.value, config);
             form.value.id = response.data.id;
             isEditMode.value = true
-            alert('Currículo cadastrado com sucesso!');
+            await Swal.fire({
+                title: 'Currículo enviado com sucesso!',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
         }
         errors.value = {};
     } catch (error) {
-        console.log("caiu aq", error.response.data.message)
         if (error.response && error.response.data.message) {
             errors.value = error.response.data.message;
         } else {
             console.error(error);
-            alert('Ocorreu um erro ao salvar o currículo.');
+            await Swal.fire({
+                title: 'Ocorreu um erro ao salvar o currículo.',
+                icon: 'error',
+                confirmButtonText: 'Try Again'
+            });
         }
     }
 };
@@ -97,11 +109,19 @@ async function deleteCurriculum() {
     };
     try {
         await axios.delete(`/api/curriculos/${form.value.id}`, config);
-        alert('Currículo apagado com sucesso!');
+        await Swal.fire({
+            title: 'Currículo apagado com sucesso!',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
         location.reload();
     } catch (error) {
         console.error(error);
-        alert('Ocorreu um erro ao apagar o currículo.');
+        await Swal.fire({
+            title: 'Ocorreu um erro ao apagar o currículo.',
+            icon: 'warning',
+            confirmButtonText: 'OK'
+        });
     }
 }
 
@@ -119,7 +139,11 @@ onMounted(async () => {
         }
     } catch (error) {
         console.error(error);
-        alert('Ocorreu um erro ao carregar o currículo.');
+        await Swal.fire({
+            title: 'Ocorreu um erro ao carregar o currículo.',
+            icon: 'warning',
+            confirmButtonText: 'OK'
+        });
     }
 });
 </script>
