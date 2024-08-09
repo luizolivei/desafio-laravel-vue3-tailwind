@@ -42,8 +42,8 @@ import ExperienceForm from "@/components/forms/ExperienceForm.vue";
 import EducationForm from "@/components/forms/EducationForm.vue";
 import CourseForm from "@/components/forms/CourseForm.vue";
 import Container from "@/components/layout/Container.vue";
-
 const store = useStore();
+
 const form = ref({
     id: null,
     nome: '',

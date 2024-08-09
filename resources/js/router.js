@@ -15,7 +15,7 @@ const routes = [
     {
         path: "/admin",
         name: "Admin",
-        component: () => import("./pages/TestRoute.vue"),
+        component: () => import("./pages/admin/index.vue"),
         meta: {requiresAuth: true, requiresAdmin: true}
     },
     {
@@ -47,9 +47,6 @@ router.beforeEach((to, from, next) => {
             next({name: 'Login'});
         }
         if (to.matched.some(record => record.meta.requiresAdmin) && store.getters.userRole !== 2) {
-            next({name: 'Home'});
-        }
-        if (to.matched.some(record => record.meta.requiresUser) && store.getters.userRole === 1) {
             next({name: 'Home'});
         }
         next();
