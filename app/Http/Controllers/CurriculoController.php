@@ -15,9 +15,29 @@ class CurriculoController extends Controller
 
     public function index()
     {
-        return Curriculo::where('user_id', Auth::id())
+        $curriculo = Curriculo::where('user_id', Auth::id())
             ->with(['experienciasProfissionais', 'escolaridades', 'cursos'])
             ->first();
+
+        if (!$curriculo) {
+            return null;
+        }
+
+        $customResponse = [
+            'id' => $curriculo->id,
+            'nome' => $curriculo->nome,
+            'email' => $curriculo->email,
+            'cpf' => $curriculo->cpf,
+            'data_nascimento' => $curriculo->data_nascimento,
+            'sexo' => $curriculo->sexo,
+            'estado_civil' => $curriculo->estado_civil,
+            'pretencao_salarial' => $curriculo->pretencao_salarial,
+            'experiencia_profissional' => $curriculo->experienciasProfissionais,
+            'escolaridade' => $curriculo->escolaridades,
+            'cursos' => $curriculo->cursos,
+        ];
+
+        return response()->json($customResponse);
     }
 
     public function store(Request $request)

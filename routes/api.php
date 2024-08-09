@@ -3,18 +3,17 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CurriculoController;
-use App\Http\Controllers\VagaController;
 
 Route::post("/backend-response", function () {
-    return 'Every thing okay!';
+    return 'Ok!';
 });
 
 Route::get('/mysql-response', function () {
     try {
         \DB::connection()->getPdo();
-        return 'Sucess!';
+        return 'Ok!';
     } catch (\Exception $e) {
-        return 'Damn anything is going wrong here:.. ' . $e->getMessage();
+        return 'Erro: ' . $e->getMessage();
     }
 });
 
