@@ -90,6 +90,11 @@ const submitForm = async () => {
     } catch (error) {
         if (error.response && error.response.data.message) {
             errors.value = error.response.data.message;
+            await Swal.fire({
+                title: 'Ocorreu um erro inesperado ao salvar o currículo.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
         } else {
             console.error(error);
             await Swal.fire({

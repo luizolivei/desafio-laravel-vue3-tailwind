@@ -70,7 +70,7 @@
                     class="mt-1 p-2 border rounded focus:outline-none focus:ring focus:border-blue-300">
                 <option value="masculino">Masculino</option>
                 <option value="feminino">Feminino</option>
-                <option value="nc">Prefiro não informar</option>
+                <option value="outro">Outro</option>
             </select>
             <span v-if="errors.sexo" class="text-red-500 text-sm">
                         {{ errors.sexo[0] }}
@@ -86,7 +86,6 @@
                     class="mt-1 p-2 border rounded focus:outline-none focus:ring focus:border-blue-300">
                 <option value="solteiro">Solteiro</option>
                 <option value="casado">Casado</option>
-                <option value="separado">Separado</option>
                 <option value="divorciado">Divorciado</option>
                 <option value="viuvo">Viúvo</option>
             </select>
