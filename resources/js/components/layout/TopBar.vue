@@ -71,6 +71,8 @@ async function logout() {
                                 <span class="block px-4 py-2 text-gray-800 border-b bg-gray-100">{{ user.name }}</span>
                                 <a href="/curriculo"
                                    class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Currículo</a>
+                                <a href="/admin" v-if="user.role === 2"
+                                   class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Admin</a>
                                 <button @click="logout"
                                         class="w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100">Sair
                                 </button>
