@@ -3,7 +3,7 @@
         <div class="flex justify-between">
             <h1 class="text-2xl font-bold mb-4">{{ isEditMode ? 'Editar Currículo' : 'Cadastrar Currículo' }}</h1>
             <router-link to="/"
-                         class="text-md md:text-md lg:text-lg underline font-bold">
+                         class="text-md md:text-md lg:text-lg underline font-bold hidden md:flex">
                 Voltar para o início
             </router-link>
         </div>
@@ -45,6 +45,7 @@
                     <input
                         type="text"
                         id="cpf"
+                        ref="cpfInput"
                         v-model="form.cpf"
                         required
                         class="mt-1 p-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
@@ -88,13 +89,16 @@
                 <!-- Campo Estado Civil -->
                 <div class="flex flex-col">
                     <label for="estado_civil" class="font-semibold">Estado Civil</label>
-                    <input
-                        type="text"
-                        id="estado_civil"
-                        v-model="form.estado_civil"
-                        required
-                        class="mt-1 p-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
-                    />
+                    <select v-model="form.estado_civil"
+                            id="estado_civil"
+                            required
+                            class="mt-1 p-2 border rounded focus:outline-none focus:ring focus:border-blue-300">
+                        <option value="solteiro">Solteiro</option>
+                        <option value="casado">Casado</option>
+                        <option value="separado">Separado</option>
+                        <option value="divorciado">Divorciado</option>
+                        <option value="viuvo">Viúvo</option>
+                    </select>
                     <span v-if="errors.estado_civil" class="text-red-500 text-sm">
                         {{ errors.estado_civil[0] }}
                     </span>
@@ -106,6 +110,7 @@
                     <input
                         type="number"
                         id="pretencao_salarial"
+                        step="100"
                         v-model="form.pretencao_salarial"
                         class="mt-1 p-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
                     />
@@ -115,6 +120,7 @@
                 </div>
             </div>
 
+            <Separator/>
             <!-- Formulário para Experiência Profissional -->
             <div v-for="(exp, index) in form.experiencia_profissional" :key="'exp-' + index"
                  class="border p-4 rounded-lg">
@@ -167,6 +173,7 @@
                     class="block mt-4 p-2 bg-blue-500 text-white rounded hover:bg-blue-600">Adicionar Experiência
             </button>
 
+            <Separator/>
             <!-- Formulário para Escolaridade -->
             <div v-for="(edu, index) in form.escolaridade" :key="'edu-' + index" class="border p-4 rounded-lg">
                 <h3 class="text-lg font-medium mb-2">Escolaridade {{ index + 1 }}</h3>
@@ -215,6 +222,7 @@
                     class="block mt-4 p-2 bg-blue-500 text-white rounded hover:bg-blue-600">Adicionar Escolaridade
             </button>
 
+            <Separator/>
             <!-- Formulário para Cursos -->
             <div v-for="(curso, index) in form.cursos" :key="'curso-' + index" class="border p-4 rounded-lg">
                 <h3 class="text-lg font-medium mb-2">Curso {{ index + 1 }}</h3>
@@ -266,6 +274,12 @@ import {ref, onMounted} from 'vue';
 import axios from 'axios';
 import {useStore} from 'vuex';
 import Container from "@/components/layout/Container.vue";
+import Inputmask from "inputmask";
+import Separator from "@/components/Separator.vue";
+
+//ref to mask
+const cpfInput = ref(null);
+
 
 const store = useStore();
 const form = ref({
@@ -403,6 +417,10 @@ async function deleteCurriculum() {
 }
 
 onMounted(async () => {
+    if (cpfInput.value) {
+        Inputmask("999.999.999-99").mask(cpfInput.value);
+    }
+
     try {
         const config = {
             headers: {
