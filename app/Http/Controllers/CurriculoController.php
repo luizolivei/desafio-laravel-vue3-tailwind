@@ -15,7 +15,9 @@ class CurriculoController extends Controller
 
     public function index()
     {
-        return Curriculo::where('user_id', Auth::id())->first();
+        return Curriculo::where('user_id', Auth::id())
+            ->with(['experienciasProfissionais', 'escolaridades', 'cursos'])
+            ->first();
     }
 
     public function store(Request $request)
@@ -25,7 +27,7 @@ class CurriculoController extends Controller
             'email' => 'required|email|max:255',
             'cpf' => 'required|digits:11',
             'data_nascimento' => 'required|date',
-            'sexo' => 'required|string|max:1',
+            'sexo' => 'required|string',
             'estado_civil' => 'required|string|max:255',
             'pretencao_salarial' => 'required|numeric|min:0|max:999999.99',
             'experiencia_profissional' => 'nullable|array',
@@ -98,7 +100,7 @@ class CurriculoController extends Controller
             'email' => 'required|email|max:255',
             'cpf' => 'required|digits:11',
             'data_nascimento' => 'required|date',
-            'sexo' => 'required|string|max:1',
+            'sexo' => 'required|string',
             'estado_civil' => 'required|string|max:255',
             'pretencao_salarial' => 'required|numeric|min:0|max:999999.99',
             'experiencia_profissional' => 'nullable|array',
@@ -140,7 +142,7 @@ class CurriculoController extends Controller
                 'pretencao_salarial' => $request->pretencao_salarial,
             ]);
 
-            //todo para evitar duplicidade ou validacoes desnecessarias apagar logo os extras
+            //todo para evitar duplicidade ou validacoes desnecessarias apagar tudo e refazer
             $curriculo->experienciasProfissionais()->delete();
             if ($request->has('experiencia_profissional')) {
                 foreach ($request->experiencia_profissional as $exp) {

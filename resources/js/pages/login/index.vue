@@ -62,11 +62,9 @@ export default {
                 const user = response.data.user;
                 const token = response.data.token;
                 await store.dispatch('login', {user, token});
-                alert('Login bem-sucedido!');
                 if (store.getters.userRole === 2)
-                    this.$router.push({name: 'Admin'});
-                else
-                    this.$router.push({name: 'Home'});
+                    return this.$router.push({name: 'Admin'});
+                this.$router.push({name: 'Curriculo'});
             } catch (error) {
                 console.error(error);
             }

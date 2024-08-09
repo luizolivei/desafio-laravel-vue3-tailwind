@@ -12,8 +12,10 @@ import Container from "@/components/layout/Container.vue";
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-12 md:col-span-8 lg:col-span-9">
                 <section class="mb-12">
-                    <p class="text-lg md:text-2xl font-semibold mb-4"><b>Borcelle online store</b> está em busca de novos talentos
-                        para integrar nosso time de estrelas.</p>
+                    <h2 class="text-lg md:text-xl font-semibold mb-4"><b>Borcelle Online Store</b> está em busca de
+                        novos
+                        talentos para fortalecer nosso time de TI. Tem experiência ou deseja adquirir conhecimentos na
+                        área? Junte-se ao nosso banco de talentos e impulsione sua carreira!</h2>
                     <p class="text-md md:text-lg mb-2">Por que escolher a Borcelle? Aqui está o que oferecemos:</p>
                     <ul class="list-disc list-inside text-gray-700 ml-6">
                         <li>Frutas frescas, cookies, café, chá e energéticos disponíveis a qualquer momento, além de
@@ -30,7 +32,7 @@ import Container from "@/components/layout/Container.vue";
                 </section>
 
                 <section class="md:mb-12">
-                    <h2 class="text-2xl font-semibold mb-4">Nossos Benefícios</h2>
+                    <h2 class="text-md md:text-lg font-semibold mb-4">Nossos Benefícios</h2>
                     <ul class="list-disc list-inside text-gray-700 ml-6">
                         <li>Benefícios Caju no valor fixo de R$1.600 por mês (alimentação, mobilidade, saldo livre e
                             auxílio home office);
@@ -42,9 +44,7 @@ import Container from "@/components/layout/Container.vue";
                         <li>Keikein, uma plataforma de apoio psicológico;</li>
                         <li>Convênio com a farmácia Panvel;</li>
                         <li>Licença maternidade e paternidade estendida pelo Programa Empresa Cidadã;</li>
-                        <li>Subsídio para desenvolvimento, com parceria com a Unico Skill, oferecendo diversas opções de
-                            graduação, pós-graduação, idiomas e mentorias;
-                        </li>
+                        <li>Subsídio para desenvolvimento, oferecendo diversas opções de graduação, pós-graduação, idiomas e mentorias;</li>
                         <li>Aulas de inglês particulares para liderança e especialistas de nível II para cima;</li>
                         <li>Parceria com a PetLove;</li>
                     </ul>
@@ -52,10 +52,11 @@ import Container from "@/components/layout/Container.vue";
             </div>
 
             <div class="col-span-12 md:col-span-4 lg:col-span-3">
-                <div class="text-center mt-4 md:mt-12 border-2 rounded border-gray-400 p-4">
-                    <p class="text-xl mb-4">Tem interesse em fazer parte do nosso time? Cadastre seu curriculo aqui</p>
-                    <router-link to="/curriculo" class="bg-blue-600 text-white text-md md:text-md lg:text-lg py-2 px-4 rounded hover:bg-blue-700 transition duration-300">
-                        Cadastrar curriculo
+                <div class="text-center mt-4 md:mt-12 border-2 rounded-lg border-gray-400 p-4">
+                    <span class="text-xl mb-4 font-bold block">Tem interesse em fazer parte do nosso time? Cadastre seu curriculo aqui</span>
+                    <router-link to="/curriculo"
+                                 class="bg-blue-600 text-white text-md md:text-md lg:text-lg py-2 px-4 rounded hover:bg-blue-700 transition duration-300 block mt-4 font-bold">
+                        Cadastrar currículo
                     </router-link>
                 </div>
                 <div class="flex justify-center mt-10">
