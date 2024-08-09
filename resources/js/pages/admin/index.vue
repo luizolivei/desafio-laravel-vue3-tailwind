@@ -3,6 +3,7 @@ import Container from "@/components/layout/Container.vue";
 import { ref, onMounted, computed } from "vue";
 import axios from "axios";
 import { useStore } from "vuex";
+import { dateFormat } from "@/mixins/dates";
 
 const store = useStore();
 const curriculos = ref([]);
@@ -36,7 +37,7 @@ const getSalarioClass = (pretencaoSalarial) => {
 const calcularSalarios = () => {
     const total = curriculos.value.reduce((acc, curriculo) => acc + parseFloat(curriculo.pretencao_salarial), 0);
     totalPretensaoSalarial.value = total.toFixed(2);
-    mediaPretensaoSalarial.value = (total / curriculos.value.length).toFixed(2);
+    mediaPretensaoSalarial.value = (curriculos.value.length ? (total / curriculos.value.length) : 0).toFixed(2);
 };
 </script>
 
@@ -71,7 +72,7 @@ const calcularSalarios = () => {
                 <td>{{ curriculo.nome }}</td>
                 <td>{{ curriculo.email }}</td>
                 <td>{{ curriculo.cpf }}</td>
-                <td>{{ curriculo.data_nascimento }}</td>
+                <td>{{ dateFormat(curriculo.data_nascimento) }}</td>
                 <td>{{ curriculo.sexo }}</td>
                 <td>{{ curriculo.estado_civil }}</td>
                 <td :class="getSalarioClass(curriculo.pretencao_salarial)">

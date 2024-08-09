@@ -137,7 +137,6 @@ const sexoOptions = [
 const estadoCivilOptions = [
     {value: 'solteiro', text: 'Solteiro'},
     {value: 'casado', text: 'Casado'},
-    {value: 'separado', text: 'Separado'},
     {value: 'divorciado', text: 'Divorciado'},
     {value: 'viuvo', text: 'Viúvo'},
 ];

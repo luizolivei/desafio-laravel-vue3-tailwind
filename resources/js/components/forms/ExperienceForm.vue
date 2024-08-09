@@ -28,7 +28,7 @@ function addExperience() {
         data_fim: '',
         emprego_atual: false,
         localizacao: '',
-        tipo: 'presencial',
+        tipo: 'efetivo',
         descricao: ''
     }
     if (!props.modelValue)

@@ -4,30 +4,24 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('cursos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('curriculo_id');
+            $table->foreignId('curriculo_id')->constrained('curriculos')->onDelete('cascade');
             $table->string('nome');
             $table->string('local');
             $table->integer('carga_horaria');
             $table->text('descricao')->nullable();
             $table->timestamps();
-
-            $table->foreign('curriculo_id')->references('id')->on('curriculos')->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('cursos');
     }

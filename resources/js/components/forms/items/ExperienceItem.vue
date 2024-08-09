@@ -63,9 +63,11 @@ const props = defineProps({
 });
 
 const tipoOptions = [
-    {value: 'presencial', text: 'Presencial'},
-    {value: 'remoto', text: 'Remoto'},
-    {value: 'hibrido', text: 'Híbrido'},
+    {value: 'estagio', text: 'Estágio'},
+    {value: 'temporario', text: 'Temporário'},
+    {value: 'efetivo', text: 'Efetivo'},
+    {value: 'freelance', text: 'Freelance'},
+    {value: 'voluntario', text: 'Voluntário'},
 ];
 
 const filteredErrors = computed(() => {
