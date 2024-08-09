@@ -4,6 +4,7 @@ import { ref, onMounted, computed } from "vue";
 import axios from "axios";
 import { useStore } from "vuex";
 import { dateFormat } from "@/mixins/dates";
+import {formatCPF} from "@/mixins/formatting.js";
 
 const store = useStore();
 const curriculos = ref([]);
@@ -71,7 +72,7 @@ const calcularSalarios = () => {
             <tr v-for="curriculo in curriculos" :key="curriculo.id">
                 <td>{{ curriculo.nome }}</td>
                 <td>{{ curriculo.email }}</td>
-                <td>{{ curriculo.cpf }}</td>
+                <td>{{ formatCPF(curriculo.cpf) }}</td>
                 <td>{{ dateFormat(curriculo.data_nascimento) }}</td>
                 <td>{{ curriculo.sexo }}</td>
                 <td>{{ curriculo.estado_civil }}</td>

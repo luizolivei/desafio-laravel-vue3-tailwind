@@ -10,6 +10,7 @@
                         placeholder="Nome"
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
+                    <p v-if="errors.name" class="text-red-500 text-xs italic mt-2">{{ errors.name[0] }}</p>
                 </div>
                 <div class="mb-4">
                     <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
@@ -19,6 +20,7 @@
                         type="email"
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
+                    <p v-if="errors.email" class="text-red-500 text-xs italic mt-2">{{ errors.email[0] }}</p>
                 </div>
                 <div class="mb-4">
                     <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Senha</label>
@@ -28,6 +30,7 @@
                         type="password"
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
+                    <p v-if="errors.password" class="text-red-500 text-xs italic mt-2">{{ errors.password[0] }}</p>
                 </div>
                 <div class="mb-6">
                     <label for="password_confirmation" class="block text-gray-700 text-sm font-bold mb-2">Confirme a Senha</label>
@@ -37,6 +40,7 @@
                         type="password"
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
+                    <p v-if="errors.password_confirmation" class="text-red-500 text-xs italic mt-2">{{ errors.password_confirmation[0] }}</p>
                 </div>
                 <div class="flex items-center justify-between">
                     <button
@@ -59,36 +63,51 @@
 </template>
 
 <script>
+import { ref } from 'vue';
 import axios from 'axios';
+import { useRouter } from 'vue-router';
 
 export default {
-    data() {
-        return {
-            name: '',
-            email: '',
-            password: '',
-            password_confirmation: ''
-        };
-    },
-    methods: {
-        register() {
-            axios.post('/api/register', {
-                name: this.name,
-                email: this.email,
-                password: this.password,
-                password_confirmation: this.password_confirmation
-            })
-                .then(response => {
-                    alert('Usuário registrado com sucesso!');
-                    this.$router.push({name: 'Login'});
-                })
-                .catch(error => {
-                    console.error(error);
+    setup() {
+        const name = ref('');
+        const email = ref('');
+        const password = ref('');
+        const password_confirmation = ref('');
+        const errors = ref({});
+        const router = useRouter();
+
+        const register = async () => {
+            try {
+                const response = await axios.post('/api/register', {
+                    name: name.value,
+                    email: email.value,
+                    password: password.value,
+                    password_confirmation: password_confirmation.value
                 });
-        },
-        goToLogin() {
-            this.$router.push({name: 'Login'});
-        }
+                alert('Usuário registrado com sucesso!');
+                router.push({ name: 'Login' });
+            } catch (error) {
+                if (error.response && error.response.data.errors) {
+                    errors.value = error.response.data.errors;
+                } else {
+                    console.error(error);
+                }
+            }
+        };
+
+        const goToLogin = () => {
+            router.push({ name: 'Login' });
+        };
+
+        return {
+            name,
+            email,
+            password,
+            password_confirmation,
+            errors,
+            register,
+            goToLogin
+        };
     }
 };
 </script>
