@@ -66,10 +66,6 @@ export default {
                 const user = response.data.user;
                 const token = response.data.token;
                 await store.dispatch('login', {user, token});
-                // await Swal.fire({
-                //     title: 'Login realizado com sucesso!',
-                //     confirmButtonText: 'OK'
-                // });
                 if (store.getters.userRole === 2)
                     return this.$router.push({name: 'Admin'});
                 this.$router.push({name: 'Curriculo'});

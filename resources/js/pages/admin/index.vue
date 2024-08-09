@@ -30,7 +30,7 @@ onMounted(async () => {
         await Swal.fire({
             title: 'Ocorreu um erro ao carregar os currículos.',
             icon: 'error',
-            confirmButtonText: 'Try Again'
+            confirmButtonText: 'OK'
         });
     }
 });

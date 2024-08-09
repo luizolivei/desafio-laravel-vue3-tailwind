@@ -95,7 +95,7 @@ const submitForm = async () => {
             await Swal.fire({
                 title: 'Ocorreu um erro ao salvar o currículo.',
                 icon: 'error',
-                confirmButtonText: 'Try Again'
+                confirmButtonText: 'OK'
             });
         }
     }
