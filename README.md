@@ -1,5 +1,8 @@
-# Laravel Vue 3 Project
-This is a project built using Laravel for the backend and Vue 3 for the frontend. It leverages the power of Laravel to handle server-side logic and Vue 3 to create a dynamic and responsive user interface.
+# Desafio Técnico
+Exame para avaliação de desenvolvimento em programação para a realização do processo seletivo
+[Exame de Seleção - 08-2024.pdf](Exame%20de%20Sele%E7%E3o%20-%2008-2024.pdf)
+
+--------------------------------------------------------------------------------------------
 
 1. Generate the database
 `php artisan migrate`
